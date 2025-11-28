@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import './endorsements.css'
+import './Endorsements.css'
 
 export default function Endorsements() {
   const autoEndorsements = [
