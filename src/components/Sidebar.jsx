@@ -11,7 +11,7 @@ const docsOptions = [
   { key: 'endorsements', label: 'Endorsements' },
   { key: 'IPFS', label: 'IPFS' },
   { key: 'GRID', label: 'GRID' },
-  { key: 'examples', label: 'Examples' },
+  { key: 'Alphabet', label: 'Alphabet' },
   { key: 'faq', label: 'FAQ' },
 ]
 

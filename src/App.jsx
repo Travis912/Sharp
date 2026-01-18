@@ -29,7 +29,7 @@ function App() {
             ) : (null
             )}
             {docsView === 'IPFS' && (
-            <>
+            <div className="docs-detail ipfs">
               <h1>IPFS</h1>
               <p>If premium changes, for ex add a vehicle... update IPFS and collect money first?</p>
               <p>NSF's: The client tells us when IPFS can take the payment.</p>
@@ -41,10 +41,10 @@ function App() {
               <p>Use 20% down payment & 9 payments for payment plan</p>
               <p>Quotes: Quick quotes don't save, use New Quote to save it</p>
               <p>IPFS notice of rescission means IPFS stops funding account & requests cancellation </p>
-            </>
+            </div>
             )}
             {docsView === 'GRID' && (
-              <div>
+              <div className="docs-detail grid">
                 <h2>GRID</h2>
                 <p>Need date first licensed (Class 5 GDL / G2 for Ontario)</p>
                 <p>-15 is best</p>
@@ -53,10 +53,27 @@ function App() {
                 <p>Start at -2 if drivers training certificate received</p>
               </div>
             )}
-            {docsView === 'examples' && (
+            {docsView === 'Alphabet' && (
               <div>
-                <h2>Examples</h2>
-                <p>Example usage, code snippets, and demos.</p>
+                <h1>Phonetic Alphabet</h1>
+                {(() => {
+                  const alphabet = [
+                    'A - Alpha','B - Bravo','C - Charlie','D - Delta','E - Echo','F - Foxtrot','G - Golf','H - Hotel','I - India','J - Juliett','K - Kilo','L - Lima','M - Mike','N - November','O - Oscar','P - Papa','Q - Quebec','R - Romeo','S - Sarah','T - Tango','U - Uniform','V - Victor','W - Whiskey','X - X-ray','Y - Yankee','Z - Zulu'
+                  ]
+                  const mid = Math.ceil(alphabet.length / 2)
+                  const left = alphabet.slice(0, mid)
+                  const right = alphabet.slice(mid)
+                  return (
+                    <div className="alphabet-columns">
+                      <ul className="alphabet-column">
+                        {left.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                      <ul className="alphabet-column">
+                        {right.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    </div>
+                  )
+                })()}
               </div>
             )}
             {docsView === 'faq' && (

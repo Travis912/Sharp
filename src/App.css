@@ -37,6 +37,34 @@ html{
 .docs-section h1{ margin:0 0 12px 0; font-size:clamp(28px,4vw,40px); }
 .docs-section p{ color:#cdd6e0; line-height:1.6 }
 
+/* Alphabet two-column layout */
+/* Alphabet two-column layout */
+.alphabet-columns{ display:flex; gap:24px; align-items:flex-start; }
+.alphabet-column{ list-style:none; margin:0; padding:0; flex:1; min-width: max-content; }
+.alphabet-column li{ margin:6px 0; color:#cdd6e0; line-height:1.4; white-space:nowrap; font-size:20px; letter-spacing:0.6px; }
+/* Make items interactive on hover */
+.alphabet-column li{
+  transition: color 160ms ease;
+}
+.alphabet-column li:hover{
+  cursor: pointer;
+  color: var(--accent);
+}
+
+/* Docs-detail specific font sizing */
+.docs-detail.ipfs, .docs-detail.grid {
+  font-size: 16px;
+}
+/* Limit height so columns fit in viewport; allow internal scrolling if necessary */
+.alphabet-columns{ max-height: calc(100vh - 220px); overflow:auto; }
+/* Allow horizontal scroll if needed so items don't wrap */
+.alphabet-columns{ overflow-x:auto }
+
+@media (max-width:700px){
+  .alphabet-columns{ display:block }
+  .alphabet-column{ margin-bottom:12px }
+}
+
 /* Activity notes cards layout */
 .activity-cards{
   display:flex;
