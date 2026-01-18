@@ -54,6 +54,7 @@ function App() {
         </section>
 
         {/* Pricing and Contact sections removed per request */}
+        <h1>TEST</h1>
       </main>
     </div>
   )
