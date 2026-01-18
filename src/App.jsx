@@ -26,16 +26,31 @@ function App() {
           <div className="docs-inner">
             {docsView === 'endorsements' ? (
               <Endorsements />
-            ) : (
-              <h1>Docsss</h1>
+            ) : (null
             )}
-            {docsView === 'setup' && (
-              <p>Setup instructions: how to get started, prerequisites, and installation steps.</p>
+            {docsView === 'IPFS' && (
+            <>
+              <h1>IPFS</h1>
+              <p>If premium changes, for ex add a vehicle... update IPFS and collect money first?</p>
+              <p>NSF's: The client tells us when IPFS can take the payment.</p>
+              <p>Renewals: Still do a $50 sharp fee</p>
+              <p>IPFS payment schedule chart is numbered 1-11, the down payment is not numbered and will come out on the same day as the first payment. First payment is a double payment</p>
+              <p>Can add endorsements to policy to see how much the premium would be, if you don't click submit it doesn't apply</p>
+              <p>IPFS phone number: 866 815-9454, the client can call</p>
+              <p>CC has a 2.25% fee for payment method</p>
+              <p>Use 20% down payment & 9 payments for payment plan</p>
+              <p>Quotes: Quick quotes don't save, use New Quote to save it</p>
+              <p>IPFS notice of rescission means IPFS stops funding account & requests cancellation </p>
+            </>
             )}
-            {docsView === 'api' && (
+            {docsView === 'GRID' && (
               <div>
-                <h2>API</h2>
-                <p>API reference and endpoints go here.</p>
+                <h2>GRID</h2>
+                <p>Need date first licensed (Class 5 GDL / G2 for Ontario)</p>
+                <p>-15 is best</p>
+                <p>-1 for each clean year</p>
+                <p>+5 for each at-fault accident</p>
+                <p>Start at -2 if drivers training certificate received</p>
               </div>
             )}
             {docsView === 'examples' && (
@@ -54,7 +69,6 @@ function App() {
         </section>
 
         {/* Pricing and Contact sections removed per request */}
-        <h1>TEST</h1>
       </main>
     </div>
   )

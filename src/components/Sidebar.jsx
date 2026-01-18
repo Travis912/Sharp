@@ -9,8 +9,8 @@ const navItems = [
 
 const docsOptions = [
   { key: 'endorsements', label: 'Endorsements' },
-  { key: 'setup', label: 'Setup' },
-  { key: 'api', label: 'API' },
+  { key: 'IPFS', label: 'IPFS' },
+  { key: 'GRID', label: 'GRID' },
   { key: 'examples', label: 'Examples' },
   { key: 'faq', label: 'FAQ' },
 ]
