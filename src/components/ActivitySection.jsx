@@ -640,7 +640,7 @@ export default function ActivitySection() {
     label,
     content: `${label} — content for Card 1. Replace with your real content.`,
     notes: card1CustomNotes[`c1-${slugify(label)}`] ?? [`Notes for ${label}: add any observations or details here.`],
-    formSchema: getFormSchema(label),
+    formSchema: (getFormSchema(label) ?? []).map((f) => (f && f.name === 'notes' ? { ...f, type: 'textarea' } : f)),
   }))
 
   const card3Options = activityOptionLabels.map((label) => ({
@@ -648,7 +648,7 @@ export default function ActivitySection() {
     label,
     content: `${label} — content for Card 3. Replace with your real content.`,
     summary: card3CustomSummaries[`c3-${slugify(label)}`] ?? `Summary for ${label}: brief summary or action items go here.`,
-    formSchema: getFormSchema(label),
+    formSchema: (getFormSchema(label) ?? []).map((f) => (f && f.name === 'notes' ? { ...f, type: 'textarea' } : f)),
   }))
 
   const [card1View, setCard1View] = useState(card1Options[0].key)
