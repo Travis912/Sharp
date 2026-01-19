@@ -25,7 +25,15 @@ html{
 .activity-section:nth-child(odd){ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
 .activity-section p{ color:#cdd6e0; line-height:1.6 }
 
-.quotes-section{ min-height:100vh; padding:36px 24px; display:flex; align-items:center; }
+.quotes-section{ min-height:100vh; padding:36px 24px; display:flex; align-items:flex-start; margin-top:5vh; }
+/* expose the same variables used by the endorsements component so mode-btns match */
+.quotes-section{
+  --endorse-accent: rgba(96,165,250,0.08);
+  --accent: #60a5fa;
+  --muted: #cdd6e0;
+  --text: #e6eefc;
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
 .quotes-inner{ max-width:900px; }
 .quotes-section:nth-child(odd){ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
 .quotes-section h1{ margin:0 0 12px 0; font-size:clamp(28px,4vw,40px); }

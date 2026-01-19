@@ -6,6 +6,7 @@ import Endorsements from './components/Endorsements'
 
 function App() {
   const [docsView, setDocsView] = useState('endorsements')
+  const [quotesMode, setQuotesMode] = useState('auto')
 
   // Activity notes moved into `ActivitySection` component
 
@@ -17,8 +18,31 @@ function App() {
 
         <section id="quotes" className="quotes-section">
           <div className="quotes-inner">
-            <h1>Quotes</h1>
-            <p>Put your custom Quotes content here.</p>
+            <div className="endorsements-header">
+              <h1>Quotes</h1>
+              <div className="endorsements-modes" role="tablist" aria-label="Quotes modes">
+                <button
+                  className={`mode-btn ${quotesMode === 'auto' ? 'active' : ''}`}
+                  onClick={() => setQuotesMode('auto')}
+                  aria-pressed={quotesMode === 'auto'}
+                >Auto</button>
+                <button
+                  className={`mode-btn ${quotesMode === 'property' ? 'active' : ''}`}
+                  onClick={() => setQuotesMode('property')}
+                  aria-pressed={quotesMode === 'property'}
+                >Property</button>
+              </div>
+            </div>
+
+            {quotesMode === 'auto' ? (
+              <div className="quotes-content">
+                <p>Pull DASH</p>
+              </div>
+            ) : (
+              <div className="quotes-content">
+                <p>Property quotes content — put your Property-related quick-info here.</p>
+              </div>
+            )}
           </div>
         </section>
 
@@ -51,6 +75,7 @@ function App() {
                 <p>-1 for each clean year</p>
                 <p>+5 for each at-fault accident</p>
                 <p>Start at -2 if drivers training certificate received</p>
+                <p>License suspension is not a clean year, ignore that year</p>
               </div>
             )}
             {docsView === 'Alphabet' && (
