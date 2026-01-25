@@ -16,7 +16,7 @@ html{
 
 .page-section{ min-height:100vh; padding:36px 24px; display:flex; align-items:center; }
 .section-inner{ max-width:900px; }
-.activity-section{ /* allow section to grow with content instead of fixed viewport height */ padding:2vh 0 2px 0; display:flex; align-items:flex-start; }
+.activity-section{ /* allow section to grow with content instead of fixed viewport height */ padding:2vh 0 2px 0; display:flex; align-items:flex-start; min-height:100vh; }
 .activity-inner{ max-width:none; width:100%; }
 .page-section:nth-child(odd){ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
 .page-section h1{ margin:0 0 12px 0; font-size:clamp(28px,4vw,40px); }
@@ -25,7 +25,7 @@ html{
 .activity-section:nth-child(odd){ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
 .activity-section p{ color:#cdd6e0; line-height:1.6 }
 
-.quotes-section{ min-height:100vh; padding:36px 24px; display:flex; align-items:flex-start; margin-top:5vh; }
+.quotes-section{ min-height:100vh; padding:calc(36px + 5vh) 24px 36px 24px; display:flex; align-items:flex-start; margin-top:0; }
 /* expose the same variables used by the endorsements component so mode-btns match */
 .quotes-section{
   --endorse-accent: rgba(96,165,250,0.08);
@@ -34,10 +34,59 @@ html{
   --text: #e6eefc;
   --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
 }
-.quotes-inner{ max-width:900px; }
+.content{ padding:0 1.5vw 12px 1.5vw; box-sizing:border-box; overflow-x:hidden; scroll-padding-top:32px; }
+.quotes-inner{ max-width:1200px; width:100%; overflow-x:hidden; margin:0 auto; }
 .quotes-section:nth-child(odd){ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
 .quotes-section h1{ margin:0 0 12px 0; font-size:clamp(28px,4vw,40px); }
-.quotes-section p{ color:#cdd6e0; line-height:1.6 }
+ .quotes-section p{ color:var(--muted); line-height:1.6 }
+
+/* Make sure mode buttons' focus outlines don't get clipped at the top */
+.endorsements-modes .mode-btn{ position:relative; border-radius:8px; padding:8px 12px; background:transparent; color:var(--muted); border:1px solid transparent }
+.endorsements-modes .mode-btn:focus,
+.endorsements-modes .mode-btn:focus-visible{
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent;
+}
+
+/* Quote cards layout */
+.quote-cards{
+  display: grid;
+  /* allow cards to shrink so three fit comfortably */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.quote-card{
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.48);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-height: 60vh; /* taller rectangles */
+}
+.quote-card h3{ margin:0 0 8px 0; font-size:1.05rem; color:var(--text) }
+.quote-card p{ margin:0; color:var(--muted); line-height:1.4 }
+/* reduce spacing under h4 inside cards */
+.quote-card h4{ margin:0 0 6px 0; font-size:1rem; color:var(--text) }
+/* list styling inside quote cards */
+.quote-card .docs-list{ margin:6px 0 0 18px; padding:0; list-style: disc; }
+.quote-card .docs-list li{ margin:6px 0; color:var(--muted); line-height:1.4 }
+
+@media (min-width:1300px){
+  /* On very wide screens keep three columns but slightly smaller min width */
+  .quote-cards{ grid-template-columns: repeat(3, minmax(300px, 1fr)); }
+  .quote-card{ min-height: 60vh; }
+}
+
+@media (max-width:640px){
+  .quote-card{ min-height: 36vh; }
+}
 
 .docs-section{ min-height:100vh; padding:12px 24px; display:flex; align-items:flex-start; }
 .docs-inner{ max-width:900px; }

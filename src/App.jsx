@@ -36,11 +36,56 @@ function App() {
 
             {quotesMode === 'auto' ? (
               <div className="quotes-content">
-                <p>Pull DASH</p>
+                <div className="quote-cards">
+                  <div className="quote-card">
+                    <h3>Documents needed:</h3>
+                    <ul className="docs-list">
+                      <li>DASH Report</li>
+                      <li>MVR</li>
+                      <li>PLPD form if TPL only</li>
+                      <li>BOS</li>
+                      <li>VOID</li>
+                      <li>Signed MAC if monthly payments</li>
+                      <li>Signed Credit Consent Form</li>
+                      <li>Signed Auto App</li>
+                    </ul>
+                  </div>
+                  <div className="quote-card">
+                    <h3>Company Specifics</h3>
+                    <h4>SGI:</h4>
+                    <p>If minor UW issues do not request SGI to fix, processing will request UW to fix them</p>
+                    <h4>Wawanesa:</h4>
+                    <p>Can only place Auto if they already have property with Wawa</p>
+                  </div>
+                  <div className="quote-card">
+                    <h3>Underwriting Notes</h3>
+                    <p>Primary contact: verify phone and email.</p>
+                    <p>Priority: check prior claims within 5 years.</p>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="quotes-content">
-                <p>Property quotes content — put your Property-related quick-info here.</p>
+                <div className="quote-cards">
+                  <div className="quote-card">
+                    <h3>Property Summary</h3>
+                    <p>Address: 123 Main St</p>
+                    <p>Type: Condo</p>
+                    <p>Built: 2005</p>
+                  </div>
+                  <div className="quote-card">
+                    <h3>Documents Needed</h3>
+                    <p>Dwelling: $350,000</p>
+                    <p>Liability: $500,000</p>
+                    <p>Deductible: $1,000</p>
+                  </div>
+                  <div className="quote-card">
+                    <h3>Replacement Cost</h3>
+                    <p>Estimate: $280,000</p>
+                    <p>Replacement Option: Actual cash value</p>
+                    <p>Notes: Verify recent renovations</p>
+                  </div>
+                </div>
               </div>
             )}
           </div>

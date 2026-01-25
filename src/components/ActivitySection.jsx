@@ -32,6 +32,8 @@ export default function ActivitySection() {
     'Change Name',
     'Payment over phone',
     'Payment made at reception',
+    'SNB - New Business Auto',
+    'SNB - New Business Property',
     'TL - Grid Rated NB',
     'TL - Commercial Referral',
     'TL - Phone Call Review',
@@ -52,13 +54,13 @@ export default function ActivitySection() {
   // Example legacy: { 'c1-a-add-vehicle': ['Doc A', 'Doc B'] }
   // Example sections: { 'c1-a-add-vehicle': [{ title: 'Required', items: ['Doc A', 'Doc B'] }] }
   const card1CustomNotes = {
-    'c1-a-add-vehicle': ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old', '#VIR', 'If vehicle is 12+ years old', 'update Wawanesa & SGIs portals', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
-    'c1-a-add-driver': ['DASH', 'Do not pull MVR', '#Questions', 'Who & why are we adding?', 'Do they have own insurance policy?', 'Traffic tickets in last 3 years?', 'Accidents in past 6 years?', 'License suspenions in past 3 years?'],
-    'c1-a-sov': ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old','#VIR', 'If vehicle is 12+ years old', 'Update Wawanesa & SGIs portals', '#Go into vehicle and edit VIN, cheaper then deleting and adding a vehicle', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
+    'c1-a-add-vehicle': ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old', '#VIR', 'Update Wawanesa & SGIs portals when received', 'Set an abeyance to follow up on VIR / BOS if needed', 'Tell client if they want full coverage to ask for it when they send in the VIR', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
+    'c1-a-add-driver': ['DASH', 'Request MVR via portal', '#Questions', 'Who & why are we adding?', 'Do they have own insurance policy?', 'Traffic tickets in last 3 years?', 'Accidents in past 6 years?', 'License suspenions in past 3 years?'],
+    'c1-a-sov': ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old','#VIR','Update Wawanesa & SGIs portals when received', 'Set an abeyance to follow up on VIR / BOS if needed', 'Tell client if they want full coverage to ask for it when they send in the VIR', '#Go into vehicle and edit VIN, cheaper then deleting and adding a vehicle', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
     'c1-a-delete-driver': ['', '#Can do over email'],
     'c1-a-delete-vehicle': ['#Can do over email', '#Make sure all drivers assigned to vehicle', '#Can only backdate if', 'Total loss ( effective 1 day after total loss, or 1 day after rental was returned)' , 'Sold', 'Got insurance elsewhere (needs proof with pol # & effective date)'],
     'c1-a-delete-lienholder': ['', '#Can do over email'],
-    'c1-a-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', 'Make any policy changes before cancelling', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', 'Do not cancel insurance on seasonally rated vehicles during off-season'],
+    'c1-a-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', 'Make any policy changes before cancelling', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', 'Do not cancel insurance on seasonally rated vehicles during off-season',  '#Intact', 'If cancelling upon renewal, email to do it'],
     'c1-a-retention-checklist': ['Verification steps completed', 'Follow-up actions required'],
     'c1-a-change-coverage': ['VIR for Section C (Coll/Comp) if 12+ yrs old', '#Parking', 'Must be on private property (No street parking)', 'Must be for 45+ days', 'If Wawa, you manually delete the coverages', 'do not park seasonally rated vehicles'],
     'c1-a-change-coverage-parking':  ['#Ask', 'Why parking', 'How long', 'Advise they must call to unpark', '#Parking musts', 'Must be on private property (No street parking)', 'Must be for 45+ days', 'Must have comp, if 12+ years old needs VIR to add comp','Do not park seasonally rated vehicles', '#Wawanesa', 'Maually delete all coverages & note what you deleted', 'No minimum days for wawa','#Intact', 'Need signed SEF16', 'Add SEF 16 to park & do not delete it when removing parking', 'Add SEF 17 to unpark', 'if < 45 days & unparking, SEF 17 effective date should be same as when SEF 16 was added, will have to call UW', '#Economical','Check or uncheck suspension of coverage box'],
@@ -73,8 +75,10 @@ export default function ActivitySection() {
     'c1-p-change-coverage': ['Location', 'Coverages changed', 'Payment adjustments'],
     'c1-p-change-mortgagee': ['#Create COI', 'GRC = INCLUDED', 'Policy date = eff date', 'Update Loss Payee', 'Insert coverage amounts', 'Put your name on form', '#Can do over email'],
     'c1-p-updates': [''],
-    'c1-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage'],
+    'c1-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', '#Intact', 'If cancelling upon renewal, email to do it'],
     'c1-p-retention-checklist': [''],
+    'c1-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet'],
+    'c1-snb-new-business-property': ['Signed App', 'Signed client consent', 'Any signed forms for declinded coverages if needed', 'Signed MAC if monthly payments',  'VOID cheque', 'iClarify', '#Set abeyance to SNB - 3 Support'],
     'c1-change-bank-account': ['#No Abeyance needed', '#Travelers', 'Email void cheque to change payment info', '#Intact', 'Call to change bank info',],
     'c1-change-payment-plan': ['#Monthly payment plan', 'Need signed MAC form','need a VOID cheque', '#One-pay payment plan','Slighlty cheaper due to no payment plan fee'],
     'c1-change-payment-date': [''],
@@ -88,13 +92,13 @@ export default function ActivitySection() {
   }
 
   const card3CustomSummaries = {
-    'c3-a-add-vehicle': ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old', '#VIR', 'If vehicle is 12+ years old', 'update Wawanesa & SGIs portals', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
-    'c3-a-add-driver': ['DASH', 'Do not pull MVR', '#Questions', 'Who & why are we adding?', 'Do they have own insurance policy?', 'Traffic tickets in last 3 years?', 'Accidents in past 6 years?', 'License suspenions in past 3 years?'],
-    'c3-a-sov':  ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old','#VIR', 'If vehicle is 12+ years old', 'Update Wawanesa & SGIs portals', '#Go into vehicle and edit VIN, cheaper then deleting and adding a vehicle', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
+    'c3-a-add-vehicle': ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old', '#VIR', 'Update Wawanesa & SGIs portals when received', 'Set an abeyance to follow up on VIR / BOS if needed', 'Tell client if they want full coverage to ask for it when they send in the VIR', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
+    'c3-a-add-driver': ['DASH', 'Request MVR via portal', '#Questions', 'Who & why are we adding?', 'Do they have own insurance policy?', 'Traffic tickets in last 3 years?', 'Accidents in past 6 years?', 'License suspenions in past 3 years?'],
+    'c3-a-sov':  ['BOS', 'Signed TPL form if TPL only','VIR if 12+ years old','#VIR', 'Update Wawanesa & SGIs portals when received', 'Set an abeyance to follow up on VIR / BOS if needed', 'Tell client if they want full coverage to ask for it when they send in the VIR', '#Go into vehicle and edit VIN, cheaper then deleting and adding a vehicle', '#If financed need address','#Issue a 30 day pink slip', 'Binder = Pol #', 'Enter vehicle info', 'Enter insurance company in capitals', 'Only list Auto named insureds'],
     'c3-a-delete-driver': ['', '#Can do over email'],
     'c3-a-delete-vehicle': ['#Can do over email', '#Make sure all drivers assigned to vehicle', '#Can only backdate if', 'Total loss ( effective 1 day after total loss, or 1 day after rental was returned)' , 'Sold', 'Got insurance elsewhere (needs proof with pol # & effective date)'],
     'c3-a-delete-lienholder': ['', '#Can do over email'],
-    'c3-a-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', 'Make any policy changes before cancelling', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', 'Do not cancel insurance on seasonally rated vehicles during off-season'],
+    'c3-a-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', 'Make any policy changes before cancelling', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', 'Do not cancel insurance on seasonally rated vehicles during off-season',  '#Intact', 'If cancelling upon renewal, email to do it'],
     'c3-a-retention-checklist': ['Verification steps completed', 'Follow-up actions required'],
     'c3-a-change-coverage': ['VIR for Section C (Coll/Comp) if 12+ yrs old', '#Parking', 'Must be on private property (No street parking)', 'Must be for 45+ days', 'If Wawa, you manually delete the coverages', 'do not park seasonally rated vehicles'],
     'c3-a-change-lienholder': ['#Create COI', 'GRC = INCLUDED', 'Policy date = today', 'Expirey date = date policy expires', 'Update Loss Payee', 'Insert coverage amounts', 'Put your name on form', '#Can do over email'],
@@ -109,8 +113,10 @@ export default function ActivitySection() {
     'c3-a-change-coverage-parking': ['#Ask', 'Why parking', 'How long', 'Advise they must call to unpark', '#Parking musts', 'Must be on private property (No street parking)', 'Must be for 45+ days', 'Must have comp, if 12+ years old needs VIR to add comp','Do not park seasonally rated vehicles', '#Wawanesa', 'Maually delete all coverages & note what you deleted', 'No minimum days for wawa','#Intact', 'Need signed SEF16', 'Add SEF 16 to park & do not delete it when removing parking', 'Add SEF 17 to unpark', 'if < 45 days & unparking, SEF 17 effective date should be same as when SEF 16 was added, will have to call UW', '#Economical','Check or uncheck suspension of coverage box'],
     'c3-p-change-mortgagee': ['#Create COI', 'GRC = INCLUDED', 'Policy date = eff date', 'Update Loss Payee', 'Insert coverage amounts', 'Put your name on form', '#Can do over email'],
     'c3-p-updates': [''],
-    'c3-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage'],
+    'c3-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage',  '#Intact', 'If cancelling upon renewal, email to do it'],
     'c3-p-retention-checklist': [''],
+    'c3-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'VIR if > 12yrs old for coll / comp'],
+    'c3-snb-new-business-property': ['Signed App'],
     'c3-change-bank-account': ['#No Abeyance needed', '#Travelers', 'Email void cheque to change payment info', '#Intact', 'Call to change banking info',],
     'c3-change-payment-plan': ['#Monthly payment plan', 'Need signed MAC form','need a VOID cheque', '#One-pay payment plan','Slighlty cheaper due to no payment plan fee'],
     'c3-change-payment-date': [''],
@@ -628,6 +634,38 @@ export default function ActivitySection() {
         { name: 'phone #', label: 'Phone #', type: 'text' , placeholder: '### ### #### & best time to call' },
         { name: 'type of business', label: 'Type of Business', type: 'text' , placeholder: 'Type of business' },
         { name: 'reason for review', label: 'Reason for Review', type: 'text' , placeholder: 'Reason for review' },
+        { name: 'notes', label: 'Notes', type: 'text', placeholder: 'None' },
+      ]
+    }
+
+    if (lower.includes('new business property')) {
+      return [
+        { name: 'quote', label: 'Quote #', type: 'text', placeholder: 'Quote / Submission number' },
+        { name: 'effectiveDate', label: 'Eff Date', type: 'date', placeholder: 'MM-DD-YYYY' },
+        { name: 'Company', label: 'Company', type: 'select', options: ['Intact Insurance', 'Economical Insurance', 'Wawanesa Insurance', 'MAX Insurance', 'Sandbox', 'Dominion'] },
+        { name: 'Married', label: 'Married', type: 'select', options: ['Single', 'Married'] },
+        { name: 'address', label: 'Address', type: 'text', placeholder: 'Property address' },
+        { name: 'declinedCoverages', label: 'D/c Coverages', type: 'text', placeholder: 'Coll / Comp' },
+        { name: 'paymentMethod', label: 'Payment Method', type: 'select', options: ['Monthly', 'Three Pay', 'One Pay', 'IPFS'] },
+        { name: 'withdrawalDate', label: 'Withdrawal Date', type: 'text', placeholder: '1' },
+        { name: 'Downpayment', label: 'Down Payment', type: 'select', options: ['NA', 'Made'] },
+        { name: 'broker', label: 'Broker', type: 'text', placeholder: 'Travis Mounsteven' },
+        { name: 'notes', label: 'Notes', type: 'text', placeholder: 'None' },
+      ]
+    }
+
+    if (lower.includes('new business auto')) {
+      return [
+        { name: 'quote', label: 'Quote #', type: 'text', placeholder: 'Quote / Submission number' },
+        { name: 'effectiveDate', label: 'Eff Date', type: 'date', placeholder: 'MM-DD-YYYY' },
+        { name: 'Company', label: 'Company', type: 'select', options: ['Intact Insurance', 'Economical Insurance', 'SGI Insurance', 'Wawanesa Insurance', 'Hagerty'] },
+        { name: 'Married', label: 'Married', type: 'select', options: ['Single', 'Married'] },
+        { name: 'declinedCoverages', label: 'D/c Coverages', type: 'text', placeholder: 'Coll / Comp' },
+        { name: 'newDrivers', label: 'New Drivers', type: 'text', placeholder: 'No / Yes and details' },
+        { name: 'paymentMethod', label: 'Payment Method', type: 'select', options: ['Monthly', 'Three Pay', 'One Pay', 'IPFS'] },
+        { name: 'withdrawalDate', label: 'Withdrawal Date', type: 'text', placeholder: '1' },
+        { name: 'monthlyPayments', label: 'Payments', type: 'text', placeholder: 'Dec 7 - $250' },
+        { name: 'broker', label: 'Broker', type: 'text', placeholder: 'Travis Mounsteven' },
         { name: 'notes', label: 'Notes', type: 'text', placeholder: 'None' },
       ]
     }

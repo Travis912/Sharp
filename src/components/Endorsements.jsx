@@ -19,6 +19,7 @@ export default function Endorsements() {
   ]
 
   const propertyEndorsements = [
+    { key: 'e-deductible-waiver', title: 'Deductible waiver', desc: 'If claim is more than $X amount, the deductible for making the claim may be waived' },
     { key: 'p-grc', title: 'Guaranteed Replacement Cost', desc: "This endorsement will provide you with GRC regardless of your policy limit." },
     { key: 'p-overland', title: 'Overland Water Coverage', desc: 'Provides coverage for actual loss or damage caused by overland water including sudden and accidental backing up or escape of water or sewage from a sewer, sump pump or septic system resulting from overland water.' },
     { key: 'p-sewer-backup', title: 'Sewer Backup', desc: 'Provides coverage for any single occurrence caused by sudden and accidental backing up or escape of dirty water, wastewater or sewage within your dwelling/unit or detached private structure through a septic system, sump pump located within your dwelling and sewer inside your premises.' },
