@@ -378,3 +378,33 @@ html{
 .card-toggle-icon{ width:16px; height:16px; display:inline-block; vertical-align:middle; margin-right:8px; flex-shrink:0 }
 .card-toggle-btn span{ vertical-align:middle }
 
+/* Quotes overlay: semi-transparent orange layer with centered sign */
+.quotes-section{ position: relative; }
+.quotes-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(255,165,0,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 60;
+  pointer-events: none; /* let underlying controls remain interactive */
+}
+.under-construction{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background: rgba(255,165,0,0.12);
+  padding:18px 24px;
+  border-radius:10px;
+  color:#7a3700;
+  font-weight:700;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+.under-construction svg{ flex-shrink:0 }
+
+@media (max-width:640px){
+  .under-construction{ padding:12px 16px; font-size:0.95rem }
+  .under-construction svg{ width:32px; height:32px }
+}
+

@@ -18,6 +18,16 @@ function App() {
 
         <section id="quotes" className="quotes-section">
           <div className="quotes-inner">
+            <div className="quotes-overlay" aria-hidden="true">
+              <div className="under-construction">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" aria-hidden="true" focusable="false">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="#874200" />
+                  <rect x="11" y="9" width="2" height="5" fill="#fff" />
+                  <rect x="11" y="16" width="2" height="2" fill="#fff" />
+                </svg>
+                <div>Under Construction</div>
+              </div>
+            </div>
             <div className="endorsements-header">
               <h1>Quotes</h1>
               <div className="endorsements-modes" role="tablist" aria-label="Quotes modes">

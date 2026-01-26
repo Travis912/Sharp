@@ -77,8 +77,8 @@ export default function ActivitySection() {
     'c1-p-updates': [''],
     'c1-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', '#Intact', 'If cancelling upon renewal, email to do it'],
     'c1-p-retention-checklist': [''],
-    'c1-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet'],
-    'c1-snb-new-business-property': ['Signed App', 'Signed client consent', 'Any signed forms for declinded coverages if needed', 'Signed MAC if monthly payments',  'VOID cheque', 'iClarify', '#Set abeyance to SNB - 3 Support'],
+    'c1-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet', '#Get credit consent over phone before letting client go', '#On pink slip use quote # as binder #'],
+    'c1-snb-new-business-property': ['Signed App', 'Signed client consent', 'Any signed forms for declinded coverages if needed', 'Signed MAC if monthly payments',  'VOID cheque', 'iClarify', '#Set abeyance to SNB - 3 Support', '#Get credit consent over phone before letting client go'],
     'c1-change-bank-account': ['#No Abeyance needed', '#Travelers', 'Email void cheque to change payment info', '#Intact', 'Call to change bank info',],
     'c1-change-payment-plan': ['#Monthly payment plan', 'Need signed MAC form','need a VOID cheque', '#One-pay payment plan','Slighlty cheaper due to no payment plan fee'],
     'c1-change-payment-date': [''],
@@ -115,8 +115,8 @@ export default function ActivitySection() {
     'c3-p-updates': [''],
     'c3-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage',  '#Intact', 'If cancelling upon renewal, email to do it'],
     'c3-p-retention-checklist': [''],
-    'c3-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'VIR if > 12yrs old for coll / comp'],
-    'c3-snb-new-business-property': ['Signed App'],
+    'c3-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet', '#Get credit consent over phone before letting client go', '#On pink slip use quote # as binder #'],
+    'c3-snb-new-business-property': ['Signed App', 'Signed client consent', 'Any signed forms for declinded coverages if needed', 'Signed MAC if monthly payments',  'VOID cheque', 'iClarify', '#Set abeyance to SNB - 3 Support', '#Get credit consent over phone before letting client go'],
     'c3-change-bank-account': ['#No Abeyance needed', '#Travelers', 'Email void cheque to change payment info', '#Intact', 'Call to change banking info',],
     'c3-change-payment-plan': ['#Monthly payment plan', 'Need signed MAC form','need a VOID cheque', '#One-pay payment plan','Slighlty cheaper due to no payment plan fee'],
     'c3-change-payment-date': [''],
@@ -661,7 +661,6 @@ export default function ActivitySection() {
         { name: 'Company', label: 'Company', type: 'select', options: ['Intact Insurance', 'Economical Insurance', 'SGI Insurance', 'Wawanesa Insurance', 'Hagerty'] },
         { name: 'Married', label: 'Married', type: 'select', options: ['Single', 'Married'] },
         { name: 'declinedCoverages', label: 'D/c Coverages', type: 'text', placeholder: 'Coll / Comp' },
-        { name: 'newDrivers', label: 'New Drivers', type: 'text', placeholder: 'No / Yes and details' },
         { name: 'paymentMethod', label: 'Payment Method', type: 'select', options: ['Monthly', 'Three Pay', 'One Pay', 'IPFS'] },
         { name: 'withdrawalDate', label: 'Withdrawal Date', type: 'text', placeholder: '1' },
         { name: 'monthlyPayments', label: 'Payments', type: 'text', placeholder: 'Dec 7 - $250' },
@@ -706,7 +705,7 @@ export default function ActivitySection() {
     const dd = String(d.getDate()).padStart(2, '0')
     return `${yyyy}-${mm}-${dd}`
   })()
-  const defaultForm = { caller: '', lease: 'Yes', stillInHH: 'No', ifYes: '', effDate: today, effectiveDate: today, policy: '', notes: '' }
+  const defaultForm = { caller: '', lease: 'Yes', stillInHH: 'No', ifYes: '', effDate: today, effectiveDate: today, date: today, policy: '', notes: '' }
   const [card1Forms, setCard1Forms] = useState(() => ({ [card1Options[0].key]: { ...defaultForm } }))
   const [card3Forms, setCard3Forms] = useState(() => ({ [card3Options[0].key]: { ...defaultForm } }))
 
@@ -765,7 +764,134 @@ export default function ActivitySection() {
       const schema = options.find((o) => o.key === viewKey)?.formSchema || []
 
       let lines = []
-      lines.push(`${options.find((o) => o.key === viewKey)?.label || viewKey}`)
+      const rawLabel = options.find((o) => o.key === viewKey)?.label || viewKey
+      const cleanedLabel = (rawLabel || '').replace(/^[A-Z&]{1,4}\s*-\s*/i, '')
+      const effRaw = (entry && (entry.effectiveDate || entry.effDate)) || defaultForm.effectiveDate || ''
+      let eff = ''
+      if (effRaw) {
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        const m = String(effRaw).match(/^(\d{4})-(\d{2})-(\d{2})$/)
+        if (m) {
+          const monIdx = Math.max(0, Math.min(11, Number(m[2]) - 1))
+          const mon = months[monIdx] || String(Number(m[2])).padStart(2, '0')
+          eff = `${mon} ${m[3]}`
+        } else {
+          try {
+            const d = new Date(effRaw)
+            if (!Number.isNaN(d.getTime())) {
+              const mon = months[d.getMonth()] || String(d.getMonth() + 1).padStart(2, '0')
+              const dd = String(d.getDate()).padStart(2, '0')
+              eff = `${mon} ${dd}`
+            }
+          } catch (e) {}
+        }
+      }
+      // Special-case SNB / SNP prefixed options: format like [ effectiveDate / NB / Company ]
+      const prefixMatch = String(rawLabel).match(/^\s*([A-Za-z0-9&.]{1,6})\s*-\s*/)
+      const prefix = prefixMatch ? String(prefixMatch[1]).toUpperCase() : ''
+      let titleLine
+      if (prefix === 'SNB' || prefix === 'SNP') {
+        // Prefer the value from a schema field labelled 'Company', falling back to common keys.
+        let company = ''
+        const companyField = schema.find((f) => /company/i.test(String(f.label || f.name)))
+        if (companyField) {
+          let rawVal = entry[companyField.name] ?? defaultForm[companyField.name] ?? ''
+          // If there's no value, but the schema provides options, use the first option as a sensible default label
+          if ((!rawVal || rawVal === '') && Array.isArray(companyField.options) && companyField.options.length) {
+            const first = companyField.options[0]
+            rawVal = (typeof first === 'string') ? first : (first.label ?? first.value ?? first.key ?? '')
+          }
+          if (rawVal && Array.isArray(companyField.options)) {
+            const found = companyField.options.find((o) => {
+              if (typeof o === 'string') return o === rawVal || String(o) === String(rawVal)
+              const key = o.key ?? o.value ?? o.label
+              const label = o.label ?? o.value ?? o.key
+              return String(key) === String(rawVal) || String(label) === String(rawVal)
+            })
+            company = found ? (typeof found === 'string' ? found : (found.label ?? found.value ?? found.key)) : String(rawVal)
+          } else {
+            company = rawVal ?? ''
+          }
+        }
+        if (!company) {
+          company = entry['Company'] ?? entry['company'] ?? entry['companyName'] ?? ''
+        }
+        // If still missing, try to read the select/displayed label from the rendered form DOM
+        if (!company) {
+          try {
+            const formEl = document.getElementById(`activity-form-${viewKey}`)
+            if (formEl) {
+              const nameCandidates = [companyField?.name, 'Company', 'company', 'companyName']
+              for (const n of nameCandidates) {
+                if (!n) continue
+                const sel = formEl.querySelector(`[name="${n}"]`)
+                if (sel) {
+                  if (sel.tagName && sel.tagName.toLowerCase() === 'select') {
+                    const opt = sel.selectedOptions && sel.selectedOptions[0]
+                    if (opt && opt.textContent && opt.textContent.trim()) { company = opt.textContent.trim(); break }
+                  } else if (sel.value) {
+                    company = String(sel.value)
+                    break
+                  }
+                }
+              }
+            }
+          } catch (e) {}
+        }
+        titleLine = `${eff || ''} / NB / ${company}`
+      } else {
+        titleLine = eff ? `${cleanedLabel} - eff ${eff}` : cleanedLabel
+      }
+      // Append quote number (if available) to the subject. Look in schema state, common keys, or the DOM.
+      try {
+        let quoteVal = ''
+        const quoteField = schema.find((f) => /quote/i.test(String(f.name || f.label)))
+        if (quoteField) {
+          let rawQ = entry[quoteField.name] ?? defaultForm[quoteField.name] ?? ''
+          if ((!rawQ || rawQ === '') && Array.isArray(quoteField.options) && quoteField.options.length) {
+            const first = quoteField.options[0]
+            rawQ = (typeof first === 'string') ? first : (first.label ?? first.value ?? first.key ?? '')
+          }
+          if (rawQ && Array.isArray(quoteField.options)) {
+            const found = quoteField.options.find((o) => {
+              if (typeof o === 'string') return o === rawQ || String(o) === String(rawQ)
+              const key = o.key ?? o.value ?? o.label
+              const label = o.label ?? o.value ?? o.key
+              return String(key) === String(rawQ) || String(label) === String(rawQ)
+            })
+            quoteVal = found ? (typeof found === 'string' ? found : (found.label ?? found.value ?? found.key)) : String(rawQ)
+          } else {
+            quoteVal = rawQ ?? ''
+          }
+        }
+
+        if (!quoteVal) {
+          quoteVal = entry['quote'] ?? entry['Quote'] ?? entry['quoteNumber'] ?? entry['quote #'] ?? ''
+        }
+
+        if (!quoteVal) {
+          const formEl = document.getElementById(`activity-form-${viewKey}`)
+          if (formEl) {
+            const nameCandidates = [quoteField?.name, 'quote', 'Quote', 'quoteNumber', 'quote #']
+            for (const n of nameCandidates) {
+              if (!n) continue
+              const el = formEl.querySelector(`[name="${n}"]`)
+              if (!el) continue
+              if (el.tagName && el.tagName.toLowerCase() === 'select') {
+                const opt = el.selectedOptions && el.selectedOptions[0]
+                if (opt && opt.textContent && opt.textContent.trim()) { quoteVal = opt.textContent.trim(); break }
+              } else if (el.value) {
+                quoteVal = String(el.value)
+                break
+              }
+            }
+          }
+        }
+
+        if (quoteVal) titleLine = `${titleLine} / ${quoteVal}`
+      } catch (e) {}
+
+      lines.push(titleLine)
       lines.push('')
       if (schema && schema.length) {
         schema.forEach((f) => {
@@ -795,6 +921,30 @@ export default function ActivitySection() {
                 }
               }
             } catch (err) {}
+          }
+
+          // If this is an effective-date field (common names + possible misspelling), format it as "Mon D, YYYY"
+          if (raw && (/^(effectiveDate|effDate|effevticeDate)$/i.test(f.name) || (/^date$/i.test(String(f.name)) && /date of call/i.test(String(f.label || ''))))) {
+            try {
+              const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+              const s = String(raw)
+              const m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+              if (m) {
+                const monIdx = Math.max(0, Math.min(11, Number(m[2]) - 1))
+                const mon = months[monIdx] || String(Number(m[2])).padStart(2, '0')
+                const day = String(Number(m[3]))
+                const year = m[1]
+                raw = `${mon} ${day}, ${year}`
+              } else {
+                const d = new Date(s)
+                if (!Number.isNaN(d.getTime())) {
+                  const mon = months[d.getMonth()] || String(d.getMonth() + 1).padStart(2, '0')
+                  const dd = d.getDate()
+                  const yyyy = d.getFullYear()
+                  raw = `${mon} ${dd}, ${yyyy}`
+                }
+              }
+            } catch (e) {}
           }
 
           lines.push(`${label}: ${raw}`)
