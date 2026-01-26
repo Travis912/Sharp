@@ -14,6 +14,8 @@ function App() {
     <div className="app-layout">
       <Sidebar onDocsChange={setDocsView} />
       <main className="content">
+        <div className="ru-cloud" aria-hidden="true" />
+        <div className="ru-cloud ru-cloud--reverse" aria-hidden="true" />
         <ActivitySection />
 
         <section id="quotes" className="quotes-section">

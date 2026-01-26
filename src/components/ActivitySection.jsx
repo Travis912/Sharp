@@ -77,7 +77,7 @@ export default function ActivitySection() {
     'c1-p-updates': [''],
     'c1-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage', '#Intact', 'If cancelling upon renewal, email to do it'],
     'c1-p-retention-checklist': [''],
-    'c1-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet', '#Get credit consent over phone before letting client go', '#On pink slip use quote # as binder #'],
+    'c1-snb-new-business-auto': ['DASH', 'Request MVR via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'VOID cheque', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet', '#Get credit consent over phone before letting client go', '#On pink slip use quote # as binder #', '#Only Wawanesa if property is with them', '#SGI TPL only requires TL approval'],
     'c1-snb-new-business-property': ['Signed App', 'Signed client consent', 'Any signed forms for declinded coverages if needed', 'Signed MAC if monthly payments',  'VOID cheque', 'iClarify', '#Set abeyance to SNB - 3 Support', '#Get credit consent over phone before letting client go'],
     'c1-change-bank-account': ['#No Abeyance needed', '#Travelers', 'Email void cheque to change payment info', '#Intact', 'Call to change bank info',],
     'c1-change-payment-plan': ['#Monthly payment plan', 'Need signed MAC form','need a VOID cheque', '#One-pay payment plan','Slighlty cheaper due to no payment plan fee'],
@@ -115,7 +115,7 @@ export default function ActivitySection() {
     'c3-p-updates': [''],
     'c3-p-cancellation': ['Signed Cancellation Form ( eSharp.Docs, and email to all named insureds )', '#Advise', 'Advise client accordingly to avoid gaps in insurance coverage',  '#Intact', 'If cancelling upon renewal, email to do it'],
     'c3-p-retention-checklist': [''],
-    'c3-snb-new-business-auto': ['DASH', 'Request MVRs via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet', '#Get credit consent over phone before letting client go', '#On pink slip use quote # as binder #'],
+    'c3-snb-new-business-auto': ['DASH', 'Request MVR via portal', 'Signed App', 'Signed TPL form if TPL only', 'Signed client consent', 'Signed MAC if monthly payments', 'VOID cheque', 'Any signed forms for declinded coverages if needed', 'VIR if > 12yrs old for coll / comp', '#Set abeyance to SNB - 3 Support', '#If IPFS collect downpayment & update payment sheet', '#Get credit consent over phone before letting client go', '#On pink slip use quote # as binder #', '#Only Wawanesa if property is with them', '#SGI TPL only requires TL approval'],
     'c3-snb-new-business-property': ['Signed App', 'Signed client consent', 'Any signed forms for declinded coverages if needed', 'Signed MAC if monthly payments',  'VOID cheque', 'iClarify', '#Set abeyance to SNB - 3 Support', '#Get credit consent over phone before letting client go'],
     'c3-change-bank-account': ['#No Abeyance needed', '#Travelers', 'Email void cheque to change payment info', '#Intact', 'Call to change banking info',],
     'c3-change-payment-plan': ['#Monthly payment plan', 'Need signed MAC form','need a VOID cheque', '#One-pay payment plan','Slighlty cheaper due to no payment plan fee'],
@@ -1026,14 +1026,18 @@ export default function ActivitySection() {
                 {(() => {
                   const sections = normalizeNotes(activeCard1?.notes)
                   if (!sections || sections.length === 0) return <div>No notes</div>
-                  return sections.map((section, si) => (
-                    <div className="notes-section" key={si}>
-                      {section.title ? <div className="notes-section-title">{section.title}</div> : null}
-                      <ul className="custom-notes">
-                        {(section.items || []).map((item, ii) => <li key={ii}>{item}</li>)}
-                      </ul>
-                    </div>
-                  ))
+                  return sections.map((section, si) => {
+                    const title = section.title || ''
+                    const displayTitle = (title.endsWith(':') && (!section.items || section.items.length === 0)) ? title.replace(/:\s*$/, '') : title
+                    return (
+                      <div className="notes-section" key={si}>
+                        {displayTitle ? <div className="notes-section-title">{displayTitle}</div> : null}
+                        <ul className="custom-notes">
+                          {(section.items || []).map((item, ii) => <li key={ii}>{item}</li>)}
+                        </ul>
+                      </div>
+                    )
+                  })
                 })()}
               </div>
           </div>
@@ -1068,14 +1072,18 @@ export default function ActivitySection() {
                   {(() => {
                     const sections = normalizeNotes(activeCard3?.summary)
                     if (!sections || sections.length === 0) return <div>No summary</div>
-                    return sections.map((section, si) => (
-                      <div className="summary-section" key={si}>
-                        {section.title ? <div className="summary-section-title">{section.title}</div> : null}
-                        <ul className="custom-notes">
-                          {(section.items || []).map((item, ii) => <li key={ii}>{item}</li>)}
-                        </ul>
-                      </div>
-                    ))
+                    return sections.map((section, si) => {
+                      const title = section.title || ''
+                      const displayTitle = (title.endsWith(':') && (!section.items || section.items.length === 0)) ? title.replace(/:\s*$/, '') : title
+                      return (
+                        <div className="summary-section" key={si}>
+                          {displayTitle ? <div className="summary-section-title">{displayTitle}</div> : null}
+                          <ul className="custom-notes">
+                            {(section.items || []).map((item, ii) => <li key={ii}>{item}</li>)}
+                          </ul>
+                        </div>
+                      )
+                    })
                   })()}
                 </div>
               </div>

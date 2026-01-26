@@ -41,7 +41,23 @@
   font-size:1.02rem; /* slightly larger text */
 }
 .mode-btn:focus{ outline:3px solid rgba(96,165,250,0.22); outline-offset:3px }
+
+/* default active (non-ru-mode) state: subtle accent */
 .mode-btn.active{ background:var(--endorse-accent); color:var(--accent); box-shadow:0 8px 22px rgba(2,6,23,0.08) }
+
+/* ru-mode: make inactive mode buttons dark blue (override default) */
+:root.ru-mode .endorsements-modes .mode-btn{
+  background: linear-gradient(180deg, #062338, #08324a);
+  color: #cdd6e0;
+  border:1px solid rgba(0,0,0,0.16);
+}
+
+/* ru-mode active state: solid pink */
+:root.ru-mode .mode-btn.active{
+  background: #ff4da6 !important;
+  color: #fff !important;
+  box-shadow: 0 10px 28px rgba(255,77,166,0.14);
+}
 
 /* Slightly increase spacing between header and content */
 .endorsements-main{ gap:22px }

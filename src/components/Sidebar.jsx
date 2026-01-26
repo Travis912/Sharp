@@ -19,13 +19,17 @@ export default function Sidebar({ onDocsChange = () => {} }) {
   const [active, setActive] = useState('activity-notes')
   const [docsOpen, setDocsOpen] = useState(false)
   const [activeDoc, setActiveDoc] = useState(docsOptions[0].key)
+  const [ruMode, setRuMode] = useState(false)
   const sidebarRef = useRef(null)
 
   useEffect(() => {
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.45 }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) setActive(entry.target.id)
+        if (entry.isIntersecting) {
+          // Only update the active navigation via scroll when Ru Mode is enabled
+          if (ruMode) setActive(entry.target.id)
+        }
       })
     }, observerOptions)
 
@@ -35,7 +39,7 @@ export default function Sidebar({ onDocsChange = () => {} }) {
     })
 
     return () => observer.disconnect()
-  }, [])
+  }, [ruMode])
 
   const handleClick = (id) => (e) => {
     e.preventDefault()
@@ -78,6 +82,15 @@ export default function Sidebar({ onDocsChange = () => {} }) {
     document.addEventListener('pointerdown', onDocPointer)
     return () => document.removeEventListener('pointerdown', onDocPointer)
   }, [])
+
+  // apply ru-mode class to document element when toggled
+  useEffect(() => {
+    try {
+      document.documentElement.classList.toggle('ru-mode', ruMode)
+    } catch (e) {
+      // ignore when running in non-browser environments
+    }
+  }, [ruMode])
 
   return (
     <nav className="sidebar" aria-label="Primary" ref={sidebarRef}>
@@ -134,6 +147,17 @@ export default function Sidebar({ onDocsChange = () => {} }) {
           </li>
         ))}
       </ul>
+      <div className="sidebar-footer">
+        <button
+          type="button"
+          className={`ru-mode-btn ${ruMode ? 'active' : ''}`}
+          aria-pressed={ruMode}
+          onClick={() => setRuMode((s) => !s)}
+          title="Toggle Ru Mode"
+        >
+          Ru Mode
+        </button>
+      </div>
     </nav>
   )
 }

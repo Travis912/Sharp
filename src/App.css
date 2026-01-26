@@ -3,6 +3,196 @@
   background-color: #121212;
 }
 
+/* ru-mode: pink theme overrides when `.ru-mode` class is applied to the root element */
+:root.ru-mode{
+  --accent: #f472b6;
+  --muted: #f6d0e6;
+  --text: #fff0f6;
+    --card-bg: linear-gradient(180deg, rgba(255,240,248,0.06), rgba(255,240,248,0.03));
+    --bg: #7ec8ff; /* sky blue background */
+  --endorse-accent: rgba(244,114,182,0.08);
+}
+
+/* Global ru-mode background/button overrides */
+:root.ru-mode body,
+:root.ru-mode .content,
+:root.ru-mode .quotes-section,
+:root.ru-mode .docs-section,
+:root.ru-mode .activity-section{
+  background: linear-gradient(180deg, rgba(126,200,255,0.85), rgba(126,200,255,0.95));
+  background-color: var(--bg);
+}
+
+/* Use a distinct sun-shaped cursor for all elements when ru-mode is active */
+:root.ru-mode *{
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='12' cy='12' r='4' fill='%23FFD54F'/><g stroke='%23FFB300' stroke-width='1.4' stroke-linecap='round'><line x1='12' y1='0' x2='12' y2='4'/><line x1='12' y1='20' x2='12' y2='24'/><line x1='0' y1='12' x2='4' y2='12'/><line x1='20' y1='12' x2='24' y2='12'/><line x1='4' y1='4' x2='7' y2='7'/><line x1='17' y1='17' x2='20' y2='20'/><line x1='17' y1='7' x2='20' y2='4'/><line x1='7' y1='17' x2='4' y2='20'/></g></svg>") 12 12, auto !important;
+}
+
+:root.ru-mode .sidebar{
+  background: linear-gradient(180deg, rgba(126,200,255,0.12), rgba(240,249,255,0.04));
+}
+
+:root.ru-mode .note-card,
+:root.ru-mode .quote-card,
+:root.ru-mode .card-body,
+:root.ru-mode .custom-notes,
+:root.ru-mode .card-header select{
+  background: var(--card-bg) !important;
+  color: var(--text) !important;
+}
+
+:root.ru-mode .card-copy-btn,
+:root.ru-mode .card-toggle-btn,
+:root.ru-mode .mode-btn,
+:root.ru-mode .ru-mode-btn,
+:root.ru-mode .custom-select-button,
+:root.ru-mode .date-picker-button,
+:root.ru-mode .custom-select-item{
+  /* Solid, non-transparent pink backgrounds for ru-mode buttons */
+  background: linear-gradient(180deg, #ff66b3, #ff4da6) !important;
+  color: var(--text) !important;
+  border-color: #ff4da6 !important;
+}
+:root.ru-mode .activity-section .date-picker-button{
+  background: linear-gradient(180deg, #ffb3da, #ff8fc0) !important;
+  color: #2b042a !important;
+  border: 1px solid rgba(255,77,166,0.22) !important;
+  box-shadow: 0 10px 28px rgba(255,77,166,0.12) !important;
+}
+
+:root.ru-mode .custom-select-list,
+:root.ru-mode .date-picker-popover{
+  /* make date picker popovers light pink for ru-mode */
+  background: linear-gradient(180deg, #ffd6eb, #ffb3da) !important;
+  color: #2b042a !important;
+  box-shadow: 0 12px 32px rgba(255,77,166,0.12) !important;
+  border: 1px solid rgba(255,77,166,0.18) !important;
+}
+:root.ru-mode .date-picker-popover{
+  /* make date picker popovers a bit darker pink for ru-mode */
+  background: linear-gradient(180deg, #ffc1dc, #ff8fc0) !important;
+  color: #2b042a !important;
+  box-shadow: 0 16px 40px rgba(255,77,166,0.18) !important;
+  border: 1px solid rgba(255,77,166,0.22) !important;
+}
+
+:root.ru-mode .custom-select-list{
+  background: linear-gradient(180deg, #7a002f, #3a0018);
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(122,0,47,0.6);
+  border: 1px solid rgba(122,0,47,0.5);
+}
+
+:root.ru-mode .custom-select-list .custom-select-item{
+  background: transparent;
+  color: var(--text);
+}
+:root.ru-mode .custom-select-list .custom-select-item:hover{
+  background: rgba(244,114,182,0.08);
+  color: var(--text);
+}
+
+:root.ru-mode .activity-section .form-input[type="date"] {
+  color: #fff !important;
+}
+
+:root.ru-mode .activity-section .date-picker-button .date-picker-value {
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+:root.ru-mode .activity-section .date-picker-button svg,
+:root.ru-mode .activity-section .date-picker-button .calendar-icon,
+:root.ru-mode .activity-section .date-picker-button .icon {
+  background: transparent !important;
+  color: #fff !important;
+}
+
+/* Keep any SVG background shapes transparent (avoid filling the square behind the glyph) */
+:root.ru-mode .activity-section .date-picker-button svg rect,
+:root.ru-mode .activity-section .date-picker-button svg .bg {
+  fill: none !important;
+}
+
+/* Color only the glyph strokes/fills white */
+:root.ru-mode .activity-section .date-picker-button svg path,
+:root.ru-mode .activity-section .date-picker-button svg polyline,
+:root.ru-mode .activity-section .date-picker-button svg polygon,
+:root.ru-mode .activity-section .date-picker-button svg circle,
+:root.ru-mode .activity-section .date-picker-button svg line {
+  stroke: #fff !important;
+  fill: #fff !important;
+}
+
+/* Native browser calendar indicator (WebKit) - invert to white in ru-mode */
+:root.ru-mode .activity-section input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.6) !important;
+}
+
+
+/* Make activity dropdown pink and improve legibility only in ru-mode */
+:root.ru-mode .custom-select-list{
+  background: linear-gradient(180deg, #ffd6eb, #ffb3da);
+  color: #2b042a;
+  border: 1px solid rgba(255,77,166,0.18);
+  box-shadow: 0 12px 32px rgba(255,77,166,0.12);
+}
+:root.ru-mode .custom-select-list .custom-select-item{ color: #2b042a }
+:root.ru-mode .custom-select-list .custom-select-item:hover{ background: rgba(255,77,166,0.06); color: #2b042a }
+
+/* Global text legibility improvements scoped to ru-mode */
+:root.ru-mode body, :root.ru-mode .content, :root.ru-mode .card-body, :root.ru-mode .quote-card, :root.ru-mode .note-card, :root.ru-mode p, :root.ru-mode li, :root.ru-mode label, :root.ru-mode .custom-notes, :root.ru-mode .docs-list{
+  color: #f7f7fb !important;
+}
+:root.ru-mode h1, :root.ru-mode h2, :root.ru-mode h3, :root.ru-mode h4, :root.ru-mode h5, :root.ru-mode h6 { font-weight: 700; color: #fff !important; letter-spacing: 0.2px }
+:root.ru-mode .custom-notes li, :root.ru-mode .docs-list li { font-weight: 600 }
+:root.ru-mode .card-header, :root.ru-mode .card-header label, :root.ru-mode .card-copy-btn { color: #fff !important }
+
+/* Make the Quotes and Endorsements section titles pink in ru-mode */
+:root.ru-mode .quotes-section h1,
+:root.ru-mode .endorsements-header h1 {
+  color: #ff4da6 !important;
+}
+
+/* Ensure form inputs have clear text contrast in ru-mode */
+:root.ru-mode .form-input, :root.ru-mode .form-textarea, :root.ru-mode .custom-select-button { color: #1b0019 !important }
+
+:root.ru-mode .quote-card h3,
+:root.ru-mode .quote-card p,
+:root.ru-mode .quote-card h4{
+  color: var(--text);
+}
+
+:root.ru-mode .card-header a,
+:root.ru-mode a,
+:root.ru-mode .custom-select-item{
+  color: var(--text) !important;
+}
+
+/* Make form inputs bright pink and activity notes bright pink when ru-mode active */
+:root.ru-mode .form-input,
+:root.ru-mode .form-textarea,
+:root.ru-mode .date-picker-button,
+:root.ru-mode .custom-select-button,
+:root.ru-mode .card-header select{
+  background: linear-gradient(180deg, #ff9fce, #ff66b3) !important;
+  color: #2b042a !important;
+  border-color: rgba(255,77,166,0.18) !important;
+}
+
+:root.ru-mode .note-card,
+:root.ru-mode .activity-cards .note-card{
+  background: linear-gradient(180deg, #ff4da6, #ff1a75) !important;
+  color: #fff !important;
+  box-shadow: 0 12px 36px rgba(255, 26, 117, 0.28) !important;
+}
+
+:root.ru-mode .note-card .card-body,
+:root.ru-mode .note-card .card-header,
+:root.ru-mode .note-card .custom-notes li{
+  color: #fff !important;
+}
+
 body{ margin:0 }
 
 html{
@@ -28,6 +218,10 @@ html{
 .quotes-section{ min-height:100vh; padding:calc(36px + 5vh) 24px 36px 24px; display:flex; align-items:flex-start; margin-top:0; }
 /* expose the same variables used by the endorsements component so mode-btns match */
 .quotes-section{
+  /* default: fully transparent when Ru Mode is not active */
+  background: transparent;
+  background-image: none;
+  background-color: transparent;
   --endorse-accent: rgba(96,165,250,0.08);
   --accent: #60a5fa;
   --muted: #cdd6e0;
@@ -42,6 +236,16 @@ html{
 
 /* Make sure mode buttons' focus outlines don't get clipped at the top */
 .endorsements-modes .mode-btn{ position:relative; border-radius:8px; padding:8px 12px; background:transparent; color:var(--muted); border:1px solid transparent }
+
+/* Ru Mode: endorsements mode buttons use dark blue when inactive */
+:root.ru-mode .endorsements-modes .mode-btn{
+  position:relative;
+  border-radius:8px;
+  padding:8px 12px;
+  background: linear-gradient(180deg, #062338, #08324a) !important;
+  color: #cdd6e0 !important;
+  border:1px solid rgba(0,0,0,0.16) !important;
+}
 .endorsements-modes .mode-btn:focus,
 .endorsements-modes .mode-btn:focus-visible{
   outline: none !important;
@@ -152,7 +356,6 @@ html{
   /* allow the card to expand vertically when its content grows */
   overflow: visible;
 }
-
 /* Give cards 1 & 3 more growth so they appear wider than 2 & 4 */
 .activity-cards > .note-card:nth-child(1),
 .activity-cards > .note-card:nth-child(3) {
@@ -283,6 +486,40 @@ html{
   box-shadow: inset 0 0 0 1px rgba(96,165,250,0.06);
 }
 
+
+/* Correctly scoped: activity-section dropdown styles apply only when ru-mode is active */
+:root.ru-mode .activity-section .custom-select-list,
+:root.ru-mode .activity-section .custom-select-button,
+:root.ru-mode .activity-section .card-header select {
+  background: linear-gradient(180deg, #ff8fc0, #ff66a3) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,111,170,0.35) !important;
+  box-shadow: 0 10px 28px rgba(255,111,170,0.18) !important;
+}
+:root.ru-mode .activity-section .custom-select-list .custom-select-item{
+  background: transparent !important;
+  color: #fff !important;
+}
+:root.ru-mode .activity-section .custom-select-list .custom-select-item:hover{
+  background: rgba(255,255,255,0.04) !important;
+  color: #fff !important;
+}
+
+/* Make activity form input/textarea text white only in Ru Mode */
+:root.ru-mode .activity-section .form-input,
+:root.ru-mode .activity-section .form-textarea,
+:root.ru-mode .activity-section .activity-form input,
+:root.ru-mode .activity-section .activity-form select,
+:root.ru-mode .activity-section .activity-form textarea {
+  color: #ffffff !important;
+}
+
+/* Ensure placeholders are readable in ru-mode */
+:root.ru-mode .activity-section .form-input::placeholder,
+:root.ru-mode .activity-section .form-textarea::placeholder {
+  color: rgba(255,255,255,0.65) !important;
+}
+
 /* Make the native datepicker/calendar icon visually white where possible */
 .form-input[type="date"]::-webkit-calendar-picker-indicator {
   -webkit-filter: invert(1) brightness(1) contrast(1);
@@ -310,6 +547,12 @@ html{
 .date-picker-day.muted{ opacity:0.32 }
 .date-picker-day:hover{ background: linear-gradient(180deg, rgba(14,18,22,0.98), rgba(8,12,16,0.96)); color:var(--accent) }
 .date-picker-day.selected{ background:linear-gradient(90deg, rgba(96,165,250,0.16), rgba(96,165,250,0.08)); color:#fff }
+
+/* Ru Mode: make hovered date cells sky-blue for a brighter, thematic hover */
+:root.ru-mode .date-picker-day:hover{
+  background: var(--bg) !important;
+  color: #2b042a !important;
+}
 
 /* Make sure popover doesn't push layout — position it fully within viewport when possible */
 .date-picker-popover{ box-sizing: border-box; }
@@ -406,5 +649,100 @@ html{
 @media (max-width:640px){
   .under-construction{ padding:12px 16px; font-size:0.95rem }
   .under-construction svg{ width:32px; height:32px }
+}
+
+/* Cloud animation: two transparent CSS clouds that drift when ru-mode is active */
+:root.ru-mode .ru-cloud,
+:root.ru-mode .ru-cloud.ru-cloud--reverse{
+  position:fixed;
+  left:-25%;
+  width:260px;
+  height:80px;
+  z-index:9999; /* bring to very front */
+  pointer-events:none;
+  opacity:0.95;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.18));
+  transform: translateX(0);
+  will-change: transform;
+}
+
+/* primary cloud (top, left->right) */
+:root.ru-mode .ru-cloud{
+  top:8vh;
+  animation: ruCloudMove 36s linear infinite;
+}
+
+/* second cloud (further down, right->left) */
+:root.ru-mode .ru-cloud.ru-cloud--reverse{
+  top:62vh;
+  left:110%; /* start off to the right */
+  animation: ruCloudMoveReverse 48s linear infinite;
+  opacity:0.9;
+  transform: translateX(0);
+}
+
+/* Build cloud with overlapping circular shapes using ::after so it's a single drawable element */
+:root.ru-mode .ru-cloud::after,
+:root.ru-mode .ru-cloud.ru-cloud--reverse::after{
+  content: "";
+  position:absolute;
+  left:12%;
+  top:22%;
+  width:56%;
+  height:56%;
+  background: #ffffff;
+  border-radius: 50px;
+  box-shadow:
+    26px -8px 0 0 #ffffff,
+    72px 4px 0 0 #ffffff,
+    110px 12px 0 0 #ffffff,
+    36px 18px 0 0 #ffffff;
+  opacity:0.95;
+}
+
+/* Make the reverse cloud visually distinct: slightly grayer, more compact, and with an additional puff */
+:root.ru-mode .ru-cloud.ru-cloud--reverse::after{
+  background: #f3f6fb;
+  border-radius: 44px;
+  box-shadow:
+    18px -6px 0 0 #f3f6fb,
+    54px 2px 0 0 #f3f6fb,
+    86px 10px 0 0 #f3f6fb,
+    28px 14px 0 0 #f3f6fb;
+  opacity:0.92;
+  transform: scale(0.88);
+}
+
+/* extra puff for the reverse cloud */
+:root.ru-mode .ru-cloud.ru-cloud--reverse::before{
+  content: "";
+  position:absolute;
+  left:4%;
+  top:40%;
+  width:36%;
+  height:36%;
+  background: #ffffff;
+  border-radius:50px;
+  box-shadow: 38px -10px 0 0 #ffffff, 68px 4px 0 0 #ffffff;
+  opacity:0.85;
+  transform: scale(0.9);
+}
+
+@keyframes ruCloudMove{
+  0%{ transform: translateX(-10vw) }
+  100%{ transform: translateX(140vw) }
+}
+
+@keyframes ruCloudMoveReverse{
+  0%{ transform: translateX(10vw) }
+  100%{ transform: translateX(-140vw) }
+}
+
+/* Make clouds smaller / adjust speed on small screens */
+@media (max-width:640px){
+  :root.ru-mode .ru-cloud,
+  :root.ru-mode .ru-cloud.ru-cloud--reverse{ width:180px; height:56px }
+  :root.ru-mode .ru-cloud{ top:6vh; animation-duration:28s }
+  :root.ru-mode .ru-cloud.ru-cloud--reverse{ top:56vh; animation-duration:36s }
 }
 

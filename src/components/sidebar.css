@@ -31,6 +31,19 @@
 .sidebar a:hover{ color:var(--accent); background:rgba(255,255,255,0.02); }
 .sidebar a.active{ color:#fff; background:linear-gradient(90deg, rgba(96,165,250,0.12), rgba(96,165,250,0.06)); box-shadow: inset 0 0 0 1px rgba(96,165,250,0.06); }
 
+/* When Ru Mode is active, make the selected navigation option pink */
+:root.ru-mode .sidebar a.active{
+  background: linear-gradient(90deg, #ff66b3, #ff4da6) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 0 0 1px rgba(255,77,166,0.12) !important;
+}
+
+/* Ensure dropdown active links also turn pink in ru-mode */
+:root.ru-mode .dropdown a.active{
+  background: linear-gradient(90deg, #ff66b3, #ff4da6) !important;
+  color: #fff !important;
+}
+
 .dropdown{ list-style:none; margin:6px 0 0 8px; padding:0; }
 .dropdown{
   list-style:none;
@@ -72,4 +85,63 @@
   /* Stack items vertically and allow the list itself to scroll vertically */
   .sidebar ul{ display:block; max-height:100vh; overflow-y:auto; padding:0; margin:0 }
   .sidebar li{ margin:8px 0 }
+}
+
+/* Footer area for the sidebar */
+.sidebar-footer{
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  width: auto;
+  display:flex;
+  justify-content:center;
+}
+.ru-mode-btn{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  font-weight:700;
+  opacity:0;
+  transition: opacity 160ms ease, transform 160ms ease, color 160ms ease, background 160ms ease;
+  transform: translateY(0);
+}
+
+/* Reveal button on hover only; avoid revealing on focus when ru-mode is not active */
+.ru-mode-btn:hover{
+  opacity:1;
+  color: #ff77b6;
+  background: rgba(255,255,255,0.02);
+  transform: translateY(-2px);
+}
+
+.ru-mode-btn.active{ /* keep rule for compatibility but hidden by default */
+  opacity:0;
+}
+
+/* Allow keyboard focus to reveal when ru-mode is active */
+:root.ru-mode .ru-mode-btn:focus,
+:root.ru-mode .ru-mode-btn:focus-visible{
+  opacity:1;
+  color: #ff77b6;
+  background: rgba(255,255,255,0.02);
+  transform: translateY(-2px);
+}
+
+/* Only show the active state when the root has ru-mode class */
+:root.ru-mode .ru-mode-btn.active{
+  opacity:1;
+  color:#fff;
+  background: linear-gradient(90deg, rgba(244,114,182,0.16), rgba(244,114,182,0.06));
+  box-shadow: inset 0 0 0 1px rgba(244,114,182,0.06);
+}
+
+/* ru-mode variable overrides to push sidebar into pink shades when active */
+:root.ru-mode{ --accent: #f472b6; --muted: #f6d0e6 }
+
+@media (max-width: 768px){
+  .sidebar-footer{ bottom: 12px }
 }
