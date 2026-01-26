@@ -142,6 +142,37 @@
 /* ru-mode variable overrides to push sidebar into pink shades when active */
 :root.ru-mode{ --accent: #f472b6; --muted: #f6d0e6 }
 
+/* Ru Mode: cloud-like nav typography — soft, rounded script with light glow */
+:root.ru-mode .sidebar a,
+:root.ru-mode .sidebar .dropdown a{
+  font-family: 'Pacifico', 'Segoe Script', 'Brush Script MT', 'Comic Sans MS', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.02rem !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0.4px !important;
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(255,255,255,0.92), 0 6px 18px rgba(126,200,255,0.16);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 12px;
+  padding-right: 14px;
+}
+
+/* Slightly reduce active padding to keep the pink highlight close to the label */
+:root.ru-mode .sidebar a.active,
+:root.ru-mode .dropdown a.active{
+  padding-left:10px !important;
+  padding-right:10px !important;
+}
+
+/* Ensure the sidebar itself expands by 15px when ru-mode is enabled */
+:root.ru-mode .sidebar{
+  width: var(--sidebar-width, 140px) !important;
+  max-width: var(--sidebar-width, 140px) !important;
+}
+
 @media (max-width: 768px){
   .sidebar-footer{ bottom: 12px }
 }

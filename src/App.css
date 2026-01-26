@@ -10,6 +10,7 @@
   --text: #fff0f6;
     --card-bg: linear-gradient(180deg, rgba(255,240,248,0.06), rgba(255,240,248,0.03));
     --bg: #7ec8ff; /* sky blue background */
+  --sidebar-width: 180px;
   --endorse-accent: rgba(244,114,182,0.08);
 }
 
@@ -30,6 +31,18 @@
 
 :root.ru-mode .sidebar{
   background: linear-gradient(180deg, rgba(126,200,255,0.12), rgba(240,249,255,0.04));
+}
+
+/* Use the ru-mode sidebar width variable to size the sidebar and content margin */
+:root.ru-mode .sidebar{
+  width: var(--sidebar-width, 140px) !important;
+  max-width: var(--sidebar-width, 140px) !important;
+  box-sizing: border-box !important;
+}
+
+:root.ru-mode .sidebar + .content,
+:root.ru-mode .content{
+  margin-left: var(--sidebar-width, 140px) !important;
 }
 
 :root.ru-mode .note-card,
