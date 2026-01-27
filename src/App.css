@@ -164,7 +164,8 @@
 /* Make the Quotes and Endorsements section titles pink in ru-mode */
 :root.ru-mode .quotes-section h1,
 :root.ru-mode .endorsements-header h1 {
-  color: #ff4da6 !important;
+  /* Match the softened ru-mode note-card pink */
+  color: #ff9fcf !important;
 }
 
 /* Ensure form inputs have clear text contrast in ru-mode */
@@ -195,9 +196,10 @@
 
 :root.ru-mode .note-card,
 :root.ru-mode .activity-cards .note-card{
-  background: linear-gradient(180deg, #ff4da6, #ff1a75) !important;
+  /* Softer pinks for reduced brightness in ru-mode */
+  background: linear-gradient(180deg, #ffc1e0, #ff9fcf) !important;
   color: #fff !important;
-  box-shadow: 0 12px 36px rgba(255, 26, 117, 0.28) !important;
+  box-shadow: 0 8px 22px rgba(255, 26, 117, 0.12) !important;
 }
 
 :root.ru-mode .note-card .card-body,

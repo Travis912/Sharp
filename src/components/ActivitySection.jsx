@@ -256,7 +256,7 @@ export default function ActivitySection() {
         { name: 'lease', label: 'Lease', type: 'select', options: ['Yes', 'No'] },
         { name: 'coverages', label: 'Coverages', type: 'text', placeholder: 'Added Coverages' },
         { name: 'declinedCoverages', label: 'D/c Coverages', type: 'text', placeholder: 'Coll / Comp' },
-        { name: 'commute', label: 'Commute', type: 'text', placeholder: '20,000km / 7km' },
+        { name: 'commute', label: 'Commute', type: 'text', placeholder: '7 / 20000km' },
         { name: 'newDrivers', label: 'New Drivers', type: 'text', placeholder: 'No / Yes and details' },
         { name: 'VIR', label: 'VIR', type: 'select', options: ['Not Required', 'Required'] },
         { name: 'monthlyPayments', label: 'Payments', type: 'text', placeholder: 'Dec 7 - $250' },
@@ -289,6 +289,7 @@ export default function ActivitySection() {
         { name: 'effectiveDate', label: 'Eff Date', type: 'date', placeholder: 'MM-DD-YYYY' },
         { name: 'reason', label: 'Reason', type: 'select' , options: ['Sold Vehicle', 'Lost to competitor', 'Vehicle Sold', 'Left Market Area', 'Vehicle total Loss', 'Remarket / Rewritten', 'Deceased'] },
         { name: 'retention', label: 'Retention', type: 'select' , options: ['Remarket: declined', 'Remarket: Cant beat competitor', 'Sold & Not Replaced', 'Left Market Area', 'Vehicle total Loss', 'No available Market'] },
+        { name: 'addressConfirmed', label: 'Address Confirmed', type: 'select' , options: ['Yes', 'No'] },
         { name: 'Xln Fees', label: 'Advised Xln Fees', type: 'select' , options: ['Yes', 'No'] },
         { name: 'Another payment', label: 'Another payment', type: 'text' , placeholder: 'If yes, details' },
         { name: 'notes', label: 'Notes', type: 'textarea', placeholder: 'None' },
@@ -892,7 +893,6 @@ export default function ActivitySection() {
       } catch (e) {}
 
       lines.push(titleLine)
-      lines.push('')
       if (schema && schema.length) {
         schema.forEach((f) => {
           const label = f.label || f.name
@@ -923,6 +923,32 @@ export default function ActivitySection() {
             } catch (err) {}
           }
 
+          // Special-case: if this is the household question, append the dependent 'ifYes' value
+          if (String(f.name) === 'stillInHH') {
+            try {
+              let ifYesVal = entry && entry['ifYes'] ? entry['ifYes'] : ''
+              if ((!ifYesVal || ifYesVal === '') ) {
+                const formEl = document.getElementById(`activity-form-${viewKey}`)
+                if (formEl) {
+                  const el = formEl.querySelector(`[name="ifYes"]`) || formEl.querySelector(`[data-field="ifYes"]`)
+                  if (el) {
+                    if (el.tagName && el.tagName.toLowerCase() === 'select') {
+                      const opt = el.selectedOptions && el.selectedOptions[0]
+                      if (opt) ifYesVal = opt.textContent || opt.value || ''
+                    } else if (el.value !== undefined) {
+                      ifYesVal = el.value
+                    } else {
+                      ifYesVal = el.textContent || ''
+                    }
+                  }
+                }
+              }
+              if (ifYesVal) {
+                raw = raw ? `${raw}, ${ifYesVal}` : `${ifYesVal}`
+              }
+            } catch (e) {}
+          }
+
           // If this is an effective-date field (common names + possible misspelling), format it as "Mon D, YYYY"
           if (raw && (/^(effectiveDate|effDate|effevticeDate)$/i.test(f.name) || (/^date$/i.test(String(f.name)) && /date of call/i.test(String(f.label || ''))))) {
             try {
@@ -949,6 +975,35 @@ export default function ActivitySection() {
 
           lines.push(`${label}: ${raw}`)
         })
+        // Capture any additional conditional fields rendered in the DOM
+        try {
+          const formEl = document.getElementById(`activity-form-${viewKey}`)
+          if (formEl) {
+            const seen = new Set((schema || []).map((s) => s.name))
+            const els = formEl.querySelectorAll('[name], [data-field]')
+            els.forEach((el) => {
+              const n = el.getAttribute('name') || el.getAttribute('data-field')
+              if (!n) return
+              // skip the option selector rendered for switching schemas
+              if (n === 'optionSelect') return
+              if (seen.has(n)) return
+              seen.add(n)
+              let v = ''
+              if (entry && Object.prototype.hasOwnProperty.call(entry, n)) v = entry[n]
+              if ((v === undefined || v === null || v === '') && el) {
+                if (el.tagName && el.tagName.toLowerCase() === 'select') {
+                  const opt = el.selectedOptions && el.selectedOptions[0]
+                  if (opt) v = opt.textContent || opt.value || ''
+                } else if (el.value !== undefined) {
+                  v = el.value
+                } else {
+                  v = el.textContent || ''
+                }
+              }
+              lines.push(`${n}: ${v ?? ''}`)
+            })
+          }
+        } catch (e) {}
       } else {
         const keys = new Set([...Object.keys(defaultForm), ...Object.keys(entry || {})])
         Array.from(keys).forEach((k) => lines.push(`${k}: ${entry[k] ?? defaultForm[k] ?? ''}`))
