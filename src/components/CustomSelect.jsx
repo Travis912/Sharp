@@ -52,7 +52,9 @@ export default function CustomSelect({ options = [], value, onChange }) {
     const root = ref.current
     const card = root?.closest?.('.note-card') || root
     const observedEl = card?.querySelector?.('.form-input') || root?.querySelector?.('.custom-select-button')
+    const cardBody = card?.querySelector?.('.card-body') || card
     if (observedEl) ro.observe(observedEl)
+    if (cardBody) ro.observe(cardBody)
 
     return () => {
       window.removeEventListener('resize', applyInitialWidth)
@@ -118,11 +120,13 @@ export default function CustomSelect({ options = [], value, onChange }) {
 
       applyWidth()
       const ro = new ResizeObserver(applyWidth)
-      // observe the input/button and the list for content or size changes
+      // observe the input/button, the card body and the list for content or size changes
       const root = ref.current
       const card = root?.closest?.('.note-card') || root
       const observedEl = card?.querySelector?.('.form-input') || root?.querySelector?.('.custom-select-button')
+      const cardBody = card?.querySelector?.('.card-body') || card
       if (observedEl) ro.observe(observedEl)
+      if (cardBody) ro.observe(cardBody)
       if (listRef.current) ro.observe(listRef.current)
       window.addEventListener('resize', applyWidth)
       const cleanup = () => {
