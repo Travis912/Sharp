@@ -1040,9 +1040,6 @@ export default function ActivitySection() {
           }
         } catch (e) {}
       }
-      const keys = new Set([...Object.keys(defaultForm), ...Object.keys(entry || {})])
-      Array.from(keys).forEach((k) => lines.push(`${k}: ${entry[k] ?? defaultForm[k] ?? ''}`))
-
       const text = lines.map((l) => String(l).replace(/\bXln\b/gi, 'cancellation')).join('\n')
       await navigator.clipboard.writeText(text)
 
